@@ -1,0 +1,33 @@
+{
+  "configurations" : [
+    {
+      "id" : "3FCC294F-8E70-43D3-A559-86A8A41AB898",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testInteropMode" : "complete",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "SwiftUITriggersTests",
+        "name" : "SwiftUITriggersTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:UI Tests.xcodeproj",
+        "identifier" : "15530BAC307AB6C700414075",
+        "name" : "SwiftUITriggersUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
