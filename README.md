@@ -111,10 +111,9 @@ A view could then handle it as follows:
     
     var body: some View {
         /* some view content */
-        .onTrigger(onSwitchTab) { tab in
+        .onFocusedSceneTriggerTrigger(onSwitchTab) { tab in
             // Switch to the provided `tab`…
         }
-        .focusedSceneValue(\.onSwitchTab, $onSwitchTab)
     }
 ```
 
