@@ -63,14 +63,14 @@ public protocol ParametrizedTriggerProtocol<Arguments>: Hashable {
     ///
     /// Only invoke this property after the trigger has been invoked at least once.
     ///
-    /// > Important: If the trigger has not yet been invoked, attempting to read this property will cause a fatal error. Use the ``unpack(_:)-((Arguments)->X)`` family of methods to retrieve these values safely.
+    /// > Important: If the trigger has not yet been invoked, attempting to read this property will cause a fatal error. Use the ``unpack(_:)-n8sm`` family of methods to retrieve these values safely.
     var arguments: Arguments { get }
     
     /// Returns whether the trigger has been invoked at least once.
     ///
     /// A trigger that has never been invoked has no associated arguments to provide.
     ///
-    /// > Important: If the trigger has not yet been invoked, attempting to read the ``arguments`` property will cause a fatal error. Use the ``unpack(_:)-((Arguments)->X)`` family of methods to retrieve these values safely.
+    /// > Important: If the trigger has not yet been invoked, attempting to read the ``arguments`` property will cause a fatal error. Use the ``unpack(_:)-n8sm`` family of methods to retrieve these values safely.
     var hasTriggered: Bool { get }
 }
 

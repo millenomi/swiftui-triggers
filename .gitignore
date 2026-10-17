@@ -10,3 +10,4 @@ DerivedData/
 .swift-version
 .swiftpm
 .devcontainer
+Package.resolved

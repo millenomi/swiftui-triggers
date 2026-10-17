@@ -117,4 +117,31 @@ A view could then handle it as follows:
     }
 ```
 
-## 
+## Cross-Platform Support
+
+The SwiftUI modifiers in this package require Apple OSes, but the package can be built on any platform, and the facilities for defining, offering and responding to triggers are available anywhere the built-in Observation framework is supported.
+
+You can offer a trigger from an `Observable` type's property, and use the freestanding `onTrigger(_:perform:)` family of functions to produce a task that can observe a trigger. For example:
+
+```swift
+let task = Task {
+    await onTrigger {
+        model.onSwitchTab
+    } perform: { tab in
+        // Handle tab switching…
+    }
+}
+
+// …
+
+// Later, to stop observation:
+task.cancel()
+```
+
+## Development Notes
+
+This package includes both UI and non-UI tests. The non-UI tests are set up as a test target in the package itself and cover the definitional and cross-platform portions of the package; the UI tests are in a separate XCTest UI Testing bundle and focus on the SwiftUI portions.
+
+To run UI tests, open Tests.xcworkspace with Xcode, and run tests for the `UI Tests` scheme. The test plan included in the project will run all tests, including the non-UI ones from the package target. 
+
+The package is documented with DocC. Use the Xcode 'Build Documentation' feature or invoke the DocC plugin using `swift package generate-documentation` to produce a usable archive.
