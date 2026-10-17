@@ -1,8 +1,8 @@
 
 # SwiftUI Triggers
-
 *The fanciest wrapper around `Bool.toggle()` that you've ever seen…*
 
+## What Is This?
 It is easy in a SwiftUI or reactive Swift application to pass around closures to trigger behavior in one part of the app from another. For example, a `FocusedValue` entry could be a closure, and invoking that closure from a `Command…` implementation (like a menu item) could work to affect the current window.
 
 However, this is not efficient. Closures are recreated as views are evaluated, and changing a focused value can have then cascading effects, requiring a reevaluation of the full app dependency tree. This can produce large effects or 'layout loops' in the application that are hard to diagnose or debug.
@@ -32,6 +32,8 @@ struct PrintCommand: Commands {
 A view can then offer to handle that view by hosting the trigger in its own state, and using the `onTrigger` modifier:
 
 ```swift
+// …
+
     @State var onPrintToLabelPrinter = Trigger()
     
     // …
@@ -43,12 +45,32 @@ A view can then offer to handle that view by hosting the trigger in its own stat
         }
         .focusedSceneValue(\.onPrintToLabelPrinter, $onPrintToLabelPrinter)
     }
+    
+// …
 ```
 
-This replaces similar idioms where `onPrintToLabelPrinter` would be defined as a `() -> Void` closure, fixing this performance issue without sacrificing ease of use.
+This replaces similar idioms where `onPrintToLabelPrinter` would be defined as a `() -> Void` closure, fixing this performance issue without sacrificing ease of use. This pattern is so common it has its own built-in shorthand in this package:
+
+```swift
+// …
+
+    @State var onPrintToLabelPrinter = Trigger()
+    
+    // …
+    
+    var body: some View {
+        /* some view content */
+        .onFocusedSceneTrigger(\.onPrintToLabelPrinter, $onPrintToLabelPrinter) {
+            // Handle the invocation.
+        }
+    }
+    
+// …
+```
+
+## Parametrized Trigger
 
 This package also defines a similar type, `ParametrizedTrigger`, that can receive and pass arguments in its invocation. It can receive and pass on any number of arguments. For example:
-
 
 ```swift
 enum TabID: Hashable {
@@ -96,3 +118,4 @@ A view could then handle it as follows:
     }
 ```
 
+## 
