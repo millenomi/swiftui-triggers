@@ -74,6 +74,15 @@ struct ContentView: View {
                                 TestViewContent.testParametrizedTriggerCallAsFunctionThroughBinding()
                             case .testParametrizedTriggerCallAsFunctionThroughBindingWithDirectArguments:
                                 TestViewContent.testParametrizedTriggerCallAsFunctionThroughBindingWithDirectArguments()
+                                
+                            case .testInvokeTriggerWithFocusShorthand:
+                                TestViewContent.testInvokeTriggerWithFocusShorthand()
+                            case .testInvokeParametrizedTriggerWithFocusShorthand:
+                                TestViewContent.testInvokeParametrizedTriggerWithFocusShorthand()
+                            case .testInvokeTriggerWithSceneFocusShorthand:
+                                TestViewContent.testInvokeTriggerWithSceneFocusShorthand()
+                            case .testInvokeParametrizedTriggerWithSceneFocusShorthand:
+                                TestViewContent.testInvokeParametrizedTriggerWithSceneFocusShorthand()
                             }
                         }
                     }

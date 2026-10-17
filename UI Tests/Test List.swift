@@ -14,6 +14,11 @@ enum Tests: String, Hashable, CaseIterable {
     case testTriggerCallAsFunctionThroughBinding
     case testParametrizedTriggerCallAsFunctionThroughBinding
     case testParametrizedTriggerCallAsFunctionThroughBindingWithDirectArguments
+    
+    case testInvokeTriggerWithFocusShorthand
+    case testInvokeParametrizedTriggerWithFocusShorthand
+    case testInvokeTriggerWithSceneFocusShorthand
+    case testInvokeParametrizedTriggerWithSceneFocusShorthand
 }
 
 // -----
@@ -36,3 +41,4 @@ extension XCUIApplication {
     }
 }
 #endif
+ 

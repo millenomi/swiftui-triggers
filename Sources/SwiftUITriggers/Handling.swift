@@ -173,6 +173,61 @@ extension View {
     }
 }
 
+// These variants combine .focusedValue/.focusedSceneValue and .onTrigger, since they are often combined.
+extension View {
+    /// Observes a trigger and invokes a closure when it is invoked. The trigger is made available as a focused value when this view is focused.
+    ///
+    /// This will present the trigger in the same fashion as a `focusedValue()` invocation.
+    ///
+    /// > For information on usage, see ``Trigger``.
+    public func onFocusedTrigger<T>(_ keyPath: WritableKeyPath<FocusedValues, Binding<T>?>, _ trigger: Binding<T>, perform operation: @escaping () -> Void) -> some View where T: TriggerProtocol {
+        self.onTrigger(trigger.wrappedValue, perform: operation)
+            .focusedValue(keyPath, trigger)
+    }
+
+    /// Observes a trigger and invokes a closure when it is invoked. The trigger is made available as a focused value when this scene is focused.
+    ///
+    /// This will present the trigger in the same fashion as a `focusedSceneValue()` invocation.
+    ///
+    /// > For information on usage, see ``Trigger``.
+    public func onFocusedSceneTrigger<T>(_ keyPath: WritableKeyPath<FocusedValues, Binding<T>?>, _ trigger: Binding<T>, perform operation: @escaping () -> Void) -> some View where T: TriggerProtocol {
+        self.onTrigger(trigger.wrappedValue, perform: operation)
+            .focusedSceneValue(keyPath, trigger)
+    }
+    
+    /// Observes a parametrized trigger and invokes a closure when it is invoked. The trigger is made available as a focused value when this view is focused.
+    ///
+    /// This will present the trigger in the same fashion as a `focusedValue()` invocation.
+    ///
+    /// > For information on usage, see ``Trigger``.
+    public func onFocusedTrigger<T, each Argument>(
+        _ keyPath: WritableKeyPath<FocusedValues, Binding<T>?>,
+        _ trigger: Binding<T>,
+        perform operation: @escaping (_ arguments: (repeat each Argument)) -> Void
+    ) -> some View
+    where T: ParametrizedTriggerProtocol,
+          T.Arguments == (repeat each Argument) {
+        self.onTrigger(trigger.wrappedValue, perform: operation)
+            .focusedValue(keyPath, trigger)
+    }
+
+    /// Observes a parametrized trigger and invokes a closure when it is invoked. The trigger is made available as a focused value when this scene is focused.
+    ///
+    /// This will present the trigger in the same fashion as a `focusedSceneValue()` invocation.
+    ///
+    /// > For information on usage, see ``Trigger``.
+    public func onFocusedSceneTrigger<T, each Argument>(
+        _ keyPath: WritableKeyPath<FocusedValues, Binding<T>?>,
+        _ trigger: Binding<T>,
+        perform operation: @escaping (_ arguments: (repeat each Argument)) -> Void
+    ) -> some View
+    where T: ParametrizedTriggerProtocol,
+          T.Arguments == (repeat each Argument) {
+        self.onTrigger(trigger.wrappedValue, perform: operation)
+            .focusedSceneValue(keyPath, trigger)
+    }
+}
+
 extension Scene {
     /// Observes a trigger and invokes a closure when it is invoked.
     ///
